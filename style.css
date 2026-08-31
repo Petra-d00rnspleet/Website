@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #12141c;
+  --bg-kaart: #1a1d28;
+  --bg-kaart-hover: #21243155;
+  --rand: #2c3040;
+  --tekst: #e9e7e0;
+  --tekst-zacht: #9a9db0;
+  --goud: #d4af6a;
+  --goud-zacht: #d4af6a33;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tekst);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ---------- Header & regenboogtitel ---------- */
+
+.top {
+  text-align: center;
+  padding: 4rem 1.5rem 2.5rem;
+}
+
+.rainbow {
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  font-weight: 700;
+  background-image: linear-gradient(
+    90deg,
+    #ff5f6d, #ffc371, #f4e04d, #6ee7a0,
+    #4fd0e9, #7a8cff, #d17aff, #ff5f6d
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: regenboogloop 6s linear infinite;
+}
+
+@keyframes regenboogloop {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.ondertitel {
+  color: var(--tekst-zacht);
+  margin-top: 0.6rem;
+  font-size: 1.05rem;
+}
+
+/* ---------- Layout ---------- */
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Categorieën ---------- */
+
+.categorie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.categorie-kaart {
+  background: var(--bg-kaart);
+  border: 1px solid var(--rand);
+  border-left: 4px solid var(--spine-kleur, var(--goud));
+  border-radius: 6px;
+  padding: 1.3rem 1.4rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--tekst);
+  font-family: inherit;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.categorie-kaart:hover {
+  transform: translateX(2px);
+}
+
+.categorie-kaart h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem;
+  margin: 0 0 0.35rem;
+}
+
+.categorie-kaart .aantal {
+  color: var(--tekst-zacht);
+  font-size: 0.9rem;
+}
+
+.categorie-leeg {
+  color: var(--tekst-zacht);
+  text-align: center;
+  padding: 3rem 1rem;
+  font-size: 1rem;
+}
+
+/* ---------- Verhalenlijst ---------- */
+
+.terug-knop {
+  background: none;
+  border: none;
+  color: var(--goud);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.terug-knop:hover { text-decoration: underline; }
+
+#verhalen-categorie-titel { margin-bottom: 1.2rem; }
+
+.verhalen-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.verhaal-item {
+  background: var(--bg-kaart);
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  text-align: left;
+  color: var(--tekst);
+  font-family: inherit;
+}
+
+.verhaal-item:hover { border-color: var(--goud); }
+
+.verhaal-item .titel {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+}
+
+.verhaal-item .auteur {
+  color: var(--tekst-zacht);
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+/* ---------- Lezen ---------- */
+
+.verhaal-artikel h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.verhaal-meta {
+  color: var(--tekst-zacht);
+  font-size: 0.9rem;
+  margin-bottom: 1.6rem;
+}
+
+.verhaal-inhoud {
+  white-space: pre-wrap;
+  font-size: 1.05rem;
+  max-width: 68ch;
+}
+
+/* ---------- Footer & beheer-knop ---------- */
+
+.onder {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rand);
+}
+
+#open-beheer {
+  background: none;
+  border: 1px solid var(--rand);
+  color: var(--tekst-zacht);
+  padding: 0.5rem 1.1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+#open-beheer:hover { border-color: var(--goud); color: var(--goud); }
+
+/* ---------- Overlay beheerpaneel ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #0a0b10ee;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4vh 1rem;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.overlay-venster {
+  background: var(--bg-kaart);
+  border: 1px solid var(--rand);
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+}
+
+.sluit-knop {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--tekst-zacht);
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+#beheer-login input,
+#beheer-paneel input,
+#beheer-paneel select,
+#beheer-paneel textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--rand);
+  color: var(--tekst);
+  padding: 0.65rem 0.8rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+#beheer-login label,
+#beheer-paneel label {
+  font-size: 0.85rem;
+  color: var(--tekst-zacht);
+  display: block;
+}
+
+#beheer-login button,
+#beheer-paneel button {
+  background: var(--goud);
+  color: #1a1206;
+  border: none;
+  padding: 0.65rem 1.3rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#beheer-login button:hover,
+#beheer-paneel button:hover { opacity: 0.9; }
+
+.fout-melding { color: #ff8a8a; margin-top: 0.8rem; font-size: 0.9rem; }
+.succes-melding { color: #7ee0a8; margin-top: 0.8rem; font-size: 0.9rem; }
+
+.beheer-verhalen-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.beheer-verhaal-rij {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.beheer-verhaal-rij .verwijder {
+  background: none;
+  border: none;
+  color: #ff8a8a;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.uitlog {
+  background: none !important;
+  border: 1px solid var(--rand) !important;
+  color: var(--tekst-zacht) !important;
+  font-weight: 500 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rainbow { animation: none; background-position: 0% 50%; }
+}
