@@ -3,13 +3,13 @@
 // Project instellingen -> Algemeen -> Jouw apps -> SDK setup and configuration
 
 const firebaseConfig = {
-  apiKey: "VUL-HIER-IN",
-  authDomain: "VUL-HIER-IN.firebaseapp.com",
-  databaseURL: "https://VUL-HIER-IN-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "VUL-HIER-IN",
-  storageBucket: "VUL-HIER-IN.appspot.com",
-  messagingSenderId: "VUL-HIER-IN",
-  appId: "VUL-HIER-IN"
+  apiKey: "AIzaSyDWMPEenAjqpJrM4wsOKJ0lUIsYCJliFGA",
+  authDomain: "petra-49128.firebaseapp.com",
+  databaseURL: "https://petra-49128-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "petra-49128",
+  storageBucket: "petra-49128.firebasestorage.app",
+  messagingSenderId: "285622440750",
+  appId: "1:285622440750:web:cde12255793f30a1a1e0bf"
 };
 
 firebase.initializeApp(firebaseConfig);
