@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verhalenhuis</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top">
+    <h1 class="rainbow" id="site-titel">Verhalenhuis</h1>
+    <p class="ondertitel">Een plek vol verhalen, gesorteerd op categorie</p>
+  </header>
+
+  <main id="main">
+
+    <!-- VIEW 1: categorieën -->
+    <section id="view-categorieen" class="view">
+      <div id="categorie-grid" class="categorie-grid"></div>
+    </section>
+
+    <!-- VIEW 2: verhalen in een categorie -->
+    <section id="view-verhalen" class="view hidden">
+      <button class="terug-knop" id="terug-naar-categorieen">&larr; Terug naar categorieën</button>
+      <h2 id="verhalen-categorie-titel"></h2>
+      <div id="verhalen-lijst" class="verhalen-lijst"></div>
+    </section>
+
+    <!-- VIEW 3: één verhaal lezen -->
+    <section id="view-lezen" class="view hidden">
+      <button class="terug-knop" id="terug-naar-verhalen">&larr; Terug naar overzicht</button>
+      <article class="verhaal-artikel">
+        <h2 id="lees-titel"></h2>
+        <p class="verhaal-meta" id="lees-meta"></p>
+        <div id="lees-inhoud" class="verhaal-inhoud"></div>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="onder">
+    <button id="open-beheer">Site beheer</button>
+  </footer>
+
+  <!-- BEHEER: wachtwoord scherm -->
+  <div id="beheer-overlay" class="overlay hidden">
+    <div class="overlay-venster">
+      <button class="sluit-knop" id="sluit-beheer">&times;</button>
+
+      <div id="beheer-login">
+        <h2>Site beheer</h2>
+        <p>Vul het wachtwoord in om verhalen te beheren.</p>
+        <input type="password" id="wachtwoord-invoer" placeholder="Wachtwoord">
+        <button id="login-knop">Inloggen</button>
+        <p class="fout-melding hidden" id="login-fout">Onjuist wachtwoord.</p>
+      </div>
+
+      <div id="beheer-paneel" class="hidden">
+        <h2>Nieuw verhaal toevoegen</h2>
+        <form id="verhaal-form">
+          <label for="input-titel">Titel</label>
+          <input type="text" id="input-titel" required>
+
+          <label for="input-categorie">Categorie</label>
+          <select id="input-categorie" required></select>
+
+          <label for="input-auteur">Auteur (optioneel)</label>
+          <input type="text" id="input-auteur">
+
+          <label for="input-inhoud">Verhaal</label>
+          <textarea id="input-inhoud" rows="10" required></textarea>
+
+          <button type="submit">Verhaal plaatsen</button>
+          <p class="succes-melding hidden" id="opslaan-succes">Verhaal geplaatst!</p>
+        </form>
+
+        <h2>Bestaande verhalen</h2>
+        <div id="beheer-verhalen-lijst" class="beheer-verhalen-lijst"></div>
+
+        <button id="uitlog-knop" class="uitlog">Uitloggen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
