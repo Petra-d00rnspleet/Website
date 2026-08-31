@@ -5,7 +5,7 @@
 // Wachtwoord voor "Site beheer". Pas dit aan naar wens.
 // Let op: dit is client-side beveiliging, prima voor een hobbysite,
 // maar niet geschikt om echt gevoelige data te beschermen.
-const BEHEER_WACHTWOORD = "verander-dit-wachtwoord";
+const BEHEER_WACHTWOORD = "IKHOUVANDIT!@*()!";
 
 // De categorieën die op de site getoond worden.
 const CATEGORIEEN = [
