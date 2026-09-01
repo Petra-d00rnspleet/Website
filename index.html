@@ -50,10 +50,11 @@
 
       <div id="beheer-login">
         <h2>Site beheer</h2>
-        <p>Vul het wachtwoord in om verhalen te beheren.</p>
-        <input type="password" id="wachtwoord-invoer" placeholder="Wachtwoord">
+        <p>Log in met je beheerdersaccount om verhalen te beheren.</p>
+        <input type="email" id="email-invoer" placeholder="E-mailadres" autocomplete="username">
+        <input type="password" id="wachtwoord-invoer" placeholder="Wachtwoord" autocomplete="current-password">
         <button id="login-knop">Inloggen</button>
-        <p class="fout-melding hidden" id="login-fout">Onjuist wachtwoord.</p>
+        <p class="fout-melding hidden" id="login-fout">Inloggen mislukt. Controleer e-mail en wachtwoord.</p>
       </div>
 
       <div id="beheer-paneel" class="hidden">
@@ -86,6 +87,7 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
   <script src="firebase-config.js"></script>
   <script src="app.js"></script>
 </body>
