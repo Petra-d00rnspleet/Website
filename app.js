@@ -2,10 +2,9 @@
    INSTELLINGEN
    ============================================================ */
 
-// Wachtwoord voor "Site beheer". Pas dit aan naar wens.
-// Let op: dit is client-side beveiliging, prima voor een hobbysite,
-// maar niet geschikt om echt gevoelige data te beschermen.
-const BEHEER_WACHTWOORD = "IKHOUVANDIT<_>";
+// Inloggen voor "Site beheer" verloopt nu via Firebase Authentication
+// (e-mail + wachtwoord). Het beheerdersaccount maak je aan in de
+// Firebase Console onder Authentication -> Users. Zie readme.md.
 
 // De categorieën die op de site getoond worden.
 const CATEGORIEEN = [
@@ -22,6 +21,7 @@ const CATEGORIEEN = [
    ============================================================ */
 
 const db = firebase.database();
+const auth = firebase.auth();
 const verhalenRef = db.ref("verhalen");
 
 let alleVerhalen = {}; // id -> verhaalobject
@@ -47,6 +47,7 @@ const leesInhoud = document.getElementById("lees-inhoud");
 const beheerOverlay = document.getElementById("beheer-overlay");
 const beheerLogin = document.getElementById("beheer-login");
 const beheerPaneel = document.getElementById("beheer-paneel");
+const emailInvoer = document.getElementById("email-invoer");
 const wachtwoordInvoer = document.getElementById("wachtwoord-invoer");
 const loginFout = document.getElementById("login-fout");
 const inputCategorie = document.getElementById("input-categorie");
@@ -158,9 +159,10 @@ document.getElementById("open-beheer").addEventListener("click", () => {
   } else {
     beheerLogin.classList.remove("hidden");
     beheerPaneel.classList.add("hidden");
+    emailInvoer.value = "";
     wachtwoordInvoer.value = "";
     loginFout.classList.add("hidden");
-    wachtwoordInvoer.focus();
+    emailInvoer.focus();
   }
 });
 
@@ -174,20 +176,30 @@ wachtwoordInvoer.addEventListener("keydown", e => {
 });
 
 function probeerInloggen() {
-  if (wachtwoordInvoer.value === BEHEER_WACHTWOORD) {
-    isIngelogd = true;
+  loginFout.classList.add("hidden");
+  auth.signInWithEmailAndPassword(emailInvoer.value.trim(), wachtwoordInvoer.value)
+    .catch(() => {
+      loginFout.classList.remove("hidden");
+    });
+  // Bij succes handelt onAuthStateChanged hieronder de rest af.
+}
+
+document.getElementById("uitlog-knop").addEventListener("click", () => {
+  auth.signOut();
+  beheerOverlay.classList.add("hidden");
+});
+
+// Firebase houdt de inlogstatus zelf bij (ook na een pagina-herlaad).
+auth.onAuthStateChanged(gebruiker => {
+  isIngelogd = !!gebruiker;
+  if (isIngelogd) {
     beheerLogin.classList.add("hidden");
     beheerPaneel.classList.remove("hidden");
     vulCategorieSelect();
     renderBeheerVerhalenLijst();
   } else {
-    loginFout.classList.remove("hidden");
+    beheerPaneel.classList.add("hidden");
   }
-}
-
-document.getElementById("uitlog-knop").addEventListener("click", () => {
-  isIngelogd = false;
-  beheerOverlay.classList.add("hidden");
 });
 
 /* ============================================================
